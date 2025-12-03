@@ -1,0 +1,90 @@
+{
+  "auth": {
+    "register_success": "Registration successful",
+    "login_success": "Login successful",
+    "logout_success": "Logout successful",
+    "token_refreshed": "Token refreshed successfully",
+    "invalid_credentials": "Invalid email or password",
+    "email_exists": "Email already exists",
+    "user_not_found": "User not found",
+    "user_inactive": "User account is inactive",
+    "invalid_token": "Invalid or expired token",
+    "unauthorized": "Unauthorized access",
+    "token_required": "Authentication token required",
+    "permission_denied": "You don't have permission to perform this action",
+    "invalid_refresh_token": "Invalid or expired refresh token"
+  },
+  "event": {
+    "created": "Event created successfully",
+    "updated": "Event updated successfully",
+    "deleted": "Event deleted successfully",
+    "not_found": "Event not found",
+    "list_retrieved": "Events retrieved successfully",
+    "detail_retrieved": "Event details retrieved successfully",
+    "already_locked": "Event is currently being edited by {{email}}",
+    "lock_acquired": "Edit lock acquired successfully",
+    "lock_released": "Edit lock released successfully",
+    "lock_maintained": "Edit lock maintained successfully",
+    "lock_expired": "Edit lock has expired",
+    "not_locked_by_you": "Event is not locked by you",
+    "cannot_delete_with_vouchers": "Cannot delete event with issued vouchers"
+  },
+  "voucher": {
+    "issued": "Voucher issued successfully",
+    "not_available": "No vouchers available for this event",
+    "event_inactive": "Event is not active",
+    "event_not_started": "Event has not started yet",
+    "event_ended": "Event has ended",
+    "already_claimed": "You have already claimed a voucher for this event",
+    "used": "Voucher used successfully",
+    "invalid_code": "Invalid voucher code",
+    "already_used": "Voucher has already been used",
+    "expired": "Voucher has expired",
+    "list_retrieved": "Vouchers retrieved successfully",
+    "not_yours": "This voucher does not belong to you"
+  },
+  "user": {
+    "profile_retrieved": "User profile retrieved successfully",
+    "profile_updated": "Profile updated successfully",
+    "password_updated": "Password updated successfully",
+    "role_updated": "User role updated successfully",
+    "incorrect_password": "Incorrect current password",
+    "sessions_retrieved": "Active sessions retrieved successfully",
+    "session_revoked": "Session revoked successfully",
+    "all_sessions_revoked": "All sessions revoked successfully"
+  },
+  "email": {
+    "subject_welcome": "Welcome to Voucher System",
+    "subject_voucher": "Your Voucher Code - {{eventTitle}}",
+    "subject_password_reset": "Password Reset Request",
+    "welcome_message": "Welcome {{firstName}}! Your account has been created successfully.",
+    "voucher_issued": "Congratulations! Your voucher has been issued.",
+    "voucher_code": "Your voucher code is: {{code}}",
+    "voucher_expires": "This voucher expires on {{expiresAt}}",
+    "sent_success": "Email sent successfully",
+    "sent_failed": "Failed to send email"
+  },
+  "validation": {
+    "required": "{{field}} is required",
+    "invalid_email": "Invalid email format",
+    "password_min": "Password must be at least 8 characters",
+    "password_mismatch": "Passwords do not match",
+    "invalid_date": "Invalid date format",
+    "future_date": "Date must be in the future",
+    "end_after_start": "End date must be after start date",
+    "invalid_id": "Invalid ID format",
+    "min_value": "{{field}} must be at least {{min}}",
+    "max_value": "{{field}} must not exceed {{max}}",
+    "invalid_enum": "{{field}} must be one of: {{values}}"
+  },
+  "common": {
+    "success": "Operation successful",
+    "error": "An error occurred",
+    "not_found": "Resource not found",
+    "internal_error": "Internal server error",
+    "bad_request": "Bad request",
+    "forbidden": "Forbidden",
+    "conflict": "Resource conflict",
+    "too_many_requests": "Too many requests, please try again later"
+  }
+}

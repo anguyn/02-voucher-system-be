@@ -1,0 +1,90 @@
+{
+  "auth": {
+    "register_success": "Đăng ký thành công",
+    "login_success": "Đăng nhập thành công",
+    "logout_success": "Đăng xuất thành công",
+    "token_refreshed": "Làm mới token thành công",
+    "invalid_credentials": "Email hoặc mật khẩu không đúng",
+    "email_exists": "Email đã tồn tại",
+    "user_not_found": "Không tìm thấy người dùng",
+    "user_inactive": "Tài khoản người dùng không hoạt động",
+    "invalid_token": "Token không hợp lệ hoặc đã hết hạn",
+    "unauthorized": "Truy cập trái phép",
+    "token_required": "Yêu cầu token xác thực",
+    "permission_denied": "Bạn không có quyền thực hiện hành động này",
+    "invalid_refresh_token": "Refresh token không hợp lệ hoặc đã hết hạn"
+  },
+  "event": {
+    "created": "Tạo sự kiện thành công",
+    "updated": "Cập nhật sự kiện thành công",
+    "deleted": "Xóa sự kiện thành công",
+    "not_found": "Không tìm thấy sự kiện",
+    "list_retrieved": "Lấy danh sách sự kiện thành công",
+    "detail_retrieved": "Lấy chi tiết sự kiện thành công",
+    "already_locked": "Sự kiện đang được chỉnh sửa bởi {{email}}",
+    "lock_acquired": "Khóa chỉnh sửa thành công",
+    "lock_released": "Mở khóa chỉnh sửa thành công",
+    "lock_maintained": "Duy trì khóa chỉnh sửa thành công",
+    "lock_expired": "Khóa chỉnh sửa đã hết hạn",
+    "not_locked_by_you": "Sự kiện không được khóa bởi bạn",
+    "cannot_delete_with_vouchers": "Không thể xóa sự kiện đã phát hành voucher"
+  },
+  "voucher": {
+    "issued": "Phát hành voucher thành công",
+    "not_available": "Không còn voucher cho sự kiện này",
+    "event_inactive": "Sự kiện không hoạt động",
+    "event_not_started": "Sự kiện chưa bắt đầu",
+    "event_ended": "Sự kiện đã kết thúc",
+    "already_claimed": "Bạn đã nhận voucher cho sự kiện này",
+    "used": "Sử dụng voucher thành công",
+    "invalid_code": "Mã voucher không hợp lệ",
+    "already_used": "Voucher đã được sử dụng",
+    "expired": "Voucher đã hết hạn",
+    "list_retrieved": "Lấy danh sách voucher thành công",
+    "not_yours": "Voucher này không thuộc về bạn"
+  },
+  "user": {
+    "profile_retrieved": "Lấy thông tin người dùng thành công",
+    "profile_updated": "Cập nhật thông tin thành công",
+    "password_updated": "Cập nhật mật khẩu thành công",
+    "role_updated": "Cập nhật vai trò người dùng thành công",
+    "incorrect_password": "Mật khẩu hiện tại không đúng",
+    "sessions_retrieved": "Lấy danh sách phiên đăng nhập thành công",
+    "session_revoked": "Thu hồi phiên đăng nhập thành công",
+    "all_sessions_revoked": "Thu hồi tất cả phiên đăng nhập thành công"
+  },
+  "email": {
+    "subject_welcome": "Chào mừng đến với Hệ thống Voucher",
+    "subject_voucher": "Mã Voucher Của Bạn - {{eventTitle}}",
+    "subject_password_reset": "Yêu cầu đặt lại mật khẩu",
+    "welcome_message": "Chào mừng {{firstName}}! Tài khoản của bạn đã được tạo thành công.",
+    "voucher_issued": "Chúc mừng! Voucher của bạn đã được phát hành.",
+    "voucher_code": "Mã voucher của bạn là: {{code}}",
+    "voucher_expires": "Voucher này hết hạn vào {{expiresAt}}",
+    "sent_success": "Gửi email thành công",
+    "sent_failed": "Gửi email thất bại"
+  },
+  "validation": {
+    "required": "{{field}} là bắt buộc",
+    "invalid_email": "Định dạng email không hợp lệ",
+    "password_min": "Mật khẩu phải có ít nhất 8 ký tự",
+    "password_mismatch": "Mật khẩu không khớp",
+    "invalid_date": "Định dạng ngày không hợp lệ",
+    "future_date": "Ngày phải trong tương lai",
+    "end_after_start": "Ngày kết thúc phải sau ngày bắt đầu",
+    "invalid_id": "Định dạng ID không hợp lệ",
+    "min_value": "{{field}} phải ít nhất {{min}}",
+    "max_value": "{{field}} không được vượt quá {{max}}",
+    "invalid_enum": "{{field}} phải là một trong: {{values}}"
+  },
+  "common": {
+    "success": "Thao tác thành công",
+    "error": "Đã xảy ra lỗi",
+    "not_found": "Không tìm thấy tài nguyên",
+    "internal_error": "Lỗi máy chủ nội bộ",
+    "bad_request": "Yêu cầu không hợp lệ",
+    "forbidden": "Bị cấm",
+    "conflict": "Xung đột tài nguyên",
+    "too_many_requests": "Quá nhiều yêu cầu, vui lòng thử lại sau"
+  }
+}
