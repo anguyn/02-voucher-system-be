@@ -23,21 +23,17 @@ export const validate = (schema: Joi.ObjectSchema, source: ValidationSource = 'b
         const field = detail.path.join('.');
         const messageKey = detail.message;
 
-        // Extract context from Joi error
         const context = detail.context || {};
 
-        // Build translation params
         const translationParams: Record<string, any> = {
           field: context.label || field,
         };
 
-        // Add min/max values if they exist
         if (context.limit !== undefined) {
           translationParams.min = context.limit;
           translationParams.max = context.limit;
         }
 
-        // Add enum values if they exist
         if (context.valids && Array.isArray(context.valids)) {
           translationParams.values = context.valids.join(', ');
         }

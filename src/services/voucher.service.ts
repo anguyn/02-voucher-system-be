@@ -13,9 +13,6 @@ import { t } from '../config/i18n';
 import { retryTransaction } from '../utils/transaction.util';
 
 export class VoucherService {
-  /**
-   * Validate event and check user eligibility
-   */
   private async validateAndCheckEligibility(
     eventId: string,
     userId: string,
@@ -54,9 +51,6 @@ export class VoucherService {
     return event;
   }
 
-  /**
-   * Generate unique voucher code with retry logic
-   */
   private async generateUniqueCode(session: ClientSession): Promise<string> {
     const MAX_ATTEMPTS = 5;
 
@@ -69,10 +63,6 @@ export class VoucherService {
     throw new Error('Failed to generate unique voucher code');
   }
 
-  /**
-   * Issue voucher with MongoDB Transaction and Retry Logic
-   * Ensures atomicity - either voucher is issued or nothing happens
-   */
   async issueVoucher(
     eventId: string,
     userId: string,
@@ -127,9 +117,6 @@ export class VoucherService {
     });
   }
 
-  /**
-   * Use voucher
-   */
   async useVoucher(code: string, userId: string, language?: Language): Promise<void> {
     const voucher = await Voucher.findOne({ code: code.toUpperCase() }).populate('eventId');
 
@@ -154,9 +141,6 @@ export class VoucherService {
     await voucher.save();
   }
 
-  /**
-   * Get user's vouchers
-   */
   async getUserVouchers(
     userId: string,
     params: PaginationParams & { status?: string }
@@ -218,9 +202,6 @@ export class VoucherService {
     };
   }
 
-  /**
-   * Get voucher by code
-   */
   async getVoucherByCode(
     code: string,
     userId: string,
@@ -257,9 +238,6 @@ export class VoucherService {
     };
   }
 
-  /**
-   * Get event vouchers stats (Admin)
-   */
   async getEventVouchersStats(eventId: string) {
     const total = await Voucher.countDocuments({ eventId });
     const used = await Voucher.countDocuments({ eventId, isUsed: true });

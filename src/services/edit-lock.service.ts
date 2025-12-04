@@ -6,9 +6,6 @@ import { Language } from '@/types';
 const LOCK_DURATION = parseInt(process.env.EDIT_LOCK_DURATION || '300000', 10);
 
 export class EditLockService {
-  /**
-   * Acquire edit lock for an event
-   */
   async acquireLock(eventId: string, userId: string, userEmail: string, language?: Language) {
     const existingLock = await EditLock.findOne({ eventId: new Types.ObjectId(eventId) });
 
@@ -39,9 +36,6 @@ export class EditLockService {
     return lock;
   }
 
-  /**
-   * Release edit lock
-   */
   async releaseLock(eventId: string, userId: string, language?: Language): Promise<void> {
     const lock = await EditLock.findOne({ eventId: new Types.ObjectId(eventId) });
 
@@ -56,9 +50,6 @@ export class EditLockService {
     await EditLock.deleteOne({ eventId: new Types.ObjectId(eventId) });
   }
 
-  /**
-   * Maintain/extend edit lock
-   */
   async maintainLock(eventId: string, userId: string, language?: Language) {
     const lock = await EditLock.findOne({ eventId: new Types.ObjectId(eventId) });
 
@@ -82,9 +73,6 @@ export class EditLockService {
     return lock;
   }
 
-  /**
-   * Check if event is locked
-   */
   async isLocked(eventId: string): Promise<boolean> {
     const lock = await EditLock.findOne({ eventId: new Types.ObjectId(eventId) });
 
@@ -101,9 +89,6 @@ export class EditLockService {
     return true;
   }
 
-  /**
-   * Get lock info
-   */
   async getLockInfo(eventId: string) {
     const lock = await EditLock.findOne({ eventId: new Types.ObjectId(eventId) }).populate(
       'userId',
@@ -123,9 +108,6 @@ export class EditLockService {
     return lock;
   }
 
-  /**
-   * Force release lock (Admin only)
-   */
   async forceReleaseLock(eventId: string): Promise<void> {
     await EditLock.deleteOne({ eventId: new Types.ObjectId(eventId) });
   }

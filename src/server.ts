@@ -30,17 +30,6 @@ const startServer = async () => {
       console.log('='.repeat(60));
       console.log(`📍 Environment: ${process.env.NODE_ENV || 'development'}`);
       console.log(`📍 Base URL: http://${HOST}:${PORT}`);
-      console.log('');
-      console.log('📋 API Endpoints:');
-      console.log(`   ├─ Health Check: http://${HOST}:${PORT}/health`);
-      console.log(`   ├─ API v1: http://${HOST}:${PORT}/api/v1`);
-      console.log(`   └─ Detailed Health: http://${HOST}:${PORT}/health/detailed`);
-      console.log('');
-      console.log('📚 API Documentation:');
-      console.log(`   ├─ Scalar (Modern): http://${HOST}:${PORT}/docs`);
-      console.log(`   ├─ Swagger UI: http://${HOST}:${PORT}/api-docs`);
-      console.log(`   └─ OpenAPI JSON: http://${HOST}:${PORT}/openapi.json`);
-      console.log('');
       console.log('🔌 Socket.IO: Enabled');
       console.log('📨 Bull Queue: Running');
       console.log('⏰ Agenda Jobs: Scheduled');

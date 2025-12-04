@@ -17,9 +17,6 @@ import {
 import { t } from '../config/i18n';
 
 export class AuthService {
-  /**
-   * Register new user
-   */
   async register(data: RegisterDTO, language?: Language): Promise<Pick<LoginResponse, 'user'>> {
     const existingUser = await User.findOne({ email: data.email });
     if (existingUser) {
@@ -52,9 +49,6 @@ export class AuthService {
     };
   }
 
-  /**
-   * Login user
-   */
   async login(data: LoginDTO, language?: Language): Promise<LoginResponse> {
     const user = await User.findOne({ email: data.email }).select('+password');
 
@@ -103,9 +97,6 @@ export class AuthService {
     };
   }
 
-  /**
-   * Refresh access token
-   */
   async refreshAccessToken(token: string, language?: Language): Promise<AuthTokens> {
     let decoded;
     try {
@@ -145,23 +136,14 @@ export class AuthService {
     };
   }
 
-  /**
-   * Logout user - Delete specific refresh token
-   */
   async logout(userId: string, token: string): Promise<void> {
     await RefreshToken.deleteOne({ userId, token });
   }
 
-  /**
-   * Logout from all devices - Delete all refresh tokens
-   */
   async logoutAll(userId: string): Promise<void> {
     await RefreshToken.deleteMany({ userId });
   }
 
-  /**
-   * Get all active refresh tokens (represent different devices/browsers)
-   */
   async getActiveRefreshTokens(userId: string) {
     const tokens = await RefreshToken.find({
       userId,
@@ -171,9 +153,6 @@ export class AuthService {
     return tokens;
   }
 
-  /**
-   * Revoke specific refresh token (logout specific device)
-   */
   async revokeRefreshToken(userId: string, tokenId: string): Promise<void> {
     await RefreshToken.deleteOne({ _id: tokenId, userId });
   }

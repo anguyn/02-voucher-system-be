@@ -5,9 +5,6 @@ import { redisClient } from '../config/redis';
 import { t } from '../config/i18n';
 import { AuthRequest } from '../types';
 
-/**
- * Helper function to create Redis Store instances
- */
 const createRedisStore = (prefix: string) => {
   return new RedisStore({
     sendCommand: async (...args: string[]) => {
@@ -19,9 +16,6 @@ const createRedisStore = (prefix: string) => {
   });
 };
 
-/**
- * General API Rate Limiter
- */
 export const apiLimiter: RateLimitRequestHandler = rateLimit({
   windowMs: parseInt(process.env.RATE_LIMIT_WINDOW_MS || '900000', 10), // 15 minutes
   max: parseInt(process.env.RATE_LIMIT_MAX_REQUESTS || '100', 10),
@@ -48,9 +42,6 @@ export const apiLimiter: RateLimitRequestHandler = rateLimit({
   },
 });
 
-/**
- * Strict Rate Limiter for Auth endpoints
- */
 export const authLimiter: RateLimitRequestHandler = rateLimit({
   windowMs: 15 * 60 * 1000,
   max: 5,
@@ -67,9 +58,6 @@ export const authLimiter: RateLimitRequestHandler = rateLimit({
   store: createRedisStore('auth'),
 });
 
-/**
- * Voucher Issuance Rate Limiter
- */
 export const voucherLimiter: RateLimitRequestHandler = rateLimit({
   windowMs: 60 * 1000,
   max: 3,

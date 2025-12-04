@@ -16,6 +16,7 @@ export default [
   
   {
     files: ['src/**/*.ts'],
+    ignores: ['src/**/*.test.ts', 'src/**/*.spec.ts', 'src/__tests__/**/*.ts'],
     languageOptions: {
       parser,
       parserOptions: {
@@ -53,7 +54,11 @@ export default [
   },
   
   {
-    files: ['tests/**/*.ts', '**/*.test.ts', '**/*.spec.ts'],
+    files: [
+      'src/__tests__/**/*.ts',
+      'src/**/*.test.ts', 
+      'src/**/*.spec.ts'
+    ],
     languageOptions: {
       parser,
       parserOptions: {
@@ -83,6 +88,7 @@ export default [
       '@typescript-eslint/no-unsafe-call': 'off',
       '@typescript-eslint/unbound-method': 'off',
       'max-len': 'off',
+      complexity: 'off',
     },
   },
 ];

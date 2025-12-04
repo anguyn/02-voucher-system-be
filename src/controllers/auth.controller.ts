@@ -12,7 +12,7 @@ import { emailQueue } from '../queues/email.queue';
 
 export class AuthController {
   /**
-   * Register new user (NO TOKENS - must login after)
+   * Register new user
    */
   register = async (req: AuthRequest, res: Response): Promise<void> => {
     try {
@@ -59,7 +59,7 @@ export class AuthController {
   };
 
   /**
-   * Refresh access token (SUPPORT COOKIE + BODY)
+   * Refresh access token
    */
   refreshToken = async (req: AuthRequest, res: Response): Promise<void> => {
     try {
@@ -80,7 +80,7 @@ export class AuthController {
   };
 
   /**
-   * Logout user (CLEAR COOKIES)
+   * Logout user
    */
   logout = async (req: AuthRequest, res: Response): Promise<void> => {
     try {
@@ -99,7 +99,7 @@ export class AuthController {
   };
 
   /**
-   * Logout from all devices (CLEAR COOKIES)
+   * Logout from all devices
    */
   logoutAll = async (req: AuthRequest, res: Response): Promise<void> => {
     try {
@@ -125,7 +125,7 @@ export class AuthController {
   };
 
   /**
-   * Get all refresh tokens (devices) for current user
+   * Get all refresh tokens for current user
    */
   getRefreshTokens = async (req: AuthRequest, res: Response): Promise<void> => {
     try {
@@ -138,7 +138,7 @@ export class AuthController {
   };
 
   /**
-   * Revoke specific refresh token (logout specific device)
+   * Revoke specific refresh token
    */
   revokeRefreshToken = async (req: AuthRequest, res: Response): Promise<void> => {
     try {

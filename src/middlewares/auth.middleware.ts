@@ -5,9 +5,6 @@ import { AuthRequest, AuthCredentials, Permission } from '../types';
 import { t } from '../config/i18n';
 import { unauthorizedResponse, forbiddenResponse } from '../utils/response.util';
 
-/**
- * Authentication Middleware
- */
 export const authenticate = async (
   req: AuthRequest,
   res: Response,
@@ -49,9 +46,6 @@ export const authenticate = async (
   }
 };
 
-/**
- * Permission Middleware Factory
- */
 export const requirePermission = (permission: Permission) => {
   return (req: AuthRequest, res: Response, next: NextFunction): void => {
     if (!req.user) {
@@ -68,9 +62,6 @@ export const requirePermission = (permission: Permission) => {
   };
 };
 
-/**
- * Admin Only Middleware
- */
 export const requireAdmin = (req: AuthRequest, res: Response, next: NextFunction): void => {
   if (!req.user) {
     unauthorizedResponse(res, t('auth.unauthorized', {}, req.language));
@@ -85,9 +76,6 @@ export const requireAdmin = (req: AuthRequest, res: Response, next: NextFunction
   next();
 };
 
-/**
- * Optional Authentication
- */
 export const optionalAuth = async (
   req: AuthRequest,
   _res: Response,

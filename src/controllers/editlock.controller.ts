@@ -39,7 +39,7 @@ export class EditLockController {
   }
 
   /**
-   * Maintain/extend edit lock
+   * Extend edit lock
    */
   async maintainLock(req: AuthRequest, res: Response): Promise<void> {
     try {

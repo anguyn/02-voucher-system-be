@@ -7,9 +7,6 @@ interface CustomError extends Error {
   status?: number;
 }
 
-/**
- * Global Error Handler Middleware
- */
 export const errorHandler = (
   err: CustomError,
   req: Request,
@@ -65,9 +62,6 @@ export const errorHandler = (
   });
 };
 
-/**
- * 404 Not Found Handler
- */
 export const notFoundHandler = (req: Request, res: Response): void => {
   const authReq = req as AuthRequest;
   const language = authReq.language;

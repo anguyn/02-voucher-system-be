@@ -3,9 +3,6 @@ import { emailQueue } from './email.queue';
 import { emailService } from '../services';
 import { Language } from '../types';
 
-/**
- * Email Job Data Types
- */
 interface WelcomeEmailJob {
   email: string;
   firstName: string;
@@ -27,9 +24,6 @@ interface EventReminderJob {
   language: Language;
 }
 
-/**
- * Process welcome email
- */
 emailQueue.process('send-welcome-email', async (job: Job<WelcomeEmailJob>) => {
   const { email, firstName, language } = job.data;
 
@@ -40,9 +34,6 @@ emailQueue.process('send-welcome-email', async (job: Job<WelcomeEmailJob>) => {
   return { success: true, email };
 });
 
-/**
- * Process voucher email
- */
 emailQueue.process('send-voucher-email', async (job: Job<VoucherEmailJob>) => {
   const { email, voucherCode, eventTitle, expiresAt, language } = job.data;
 
@@ -53,9 +44,6 @@ emailQueue.process('send-voucher-email', async (job: Job<VoucherEmailJob>) => {
   return { success: true, email, voucherCode };
 });
 
-/**
- * Process event reminder email
- */
 emailQueue.process('send-reminder-email', async (job: Job<EventReminderJob>) => {
   const { email, eventTitle, startDate, language } = job.data;
 

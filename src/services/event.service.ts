@@ -1,5 +1,5 @@
 import { Types } from 'mongoose';
-import { Event, Voucher } from '../models';
+import { Event, Voucher, EditLock } from '../models';
 import {
   CreateEventDTO,
   UpdateEventDTO,
@@ -10,9 +10,20 @@ import {
 import { t } from '../config/i18n';
 
 export class EventService {
-  /**
-   * Create new event
-   */
+  private async checkEditLock(eventId: string, userId: string, language?: Language): Promise<void> {
+    const lock = await EditLock.findOne({ eventId: new Types.ObjectId(eventId) });
+
+    const now = new Date();
+    if (lock && lock.expiresAt < now) {
+      await EditLock.deleteOne({ eventId: new Types.ObjectId(eventId) });
+      throw new Error(t('event.lock_expired', {}, language));
+    }
+
+    if (lock && lock.userId.toString() !== userId) {
+      throw new Error(t('event.already_locked', { email: lock.userEmail }, language));
+    }
+  }
+
   async createEvent(data: CreateEventDTO, userId: string, _language?: Language) {
     const event = await Event.create({
       ...data,
@@ -22,9 +33,6 @@ export class EventService {
     return event;
   }
 
-  /**
-   * Get all events with pagination
-   */
   async getEvents(
     params: PaginationParams & { status?: string },
     _language?: Language
@@ -68,9 +76,6 @@ export class EventService {
     };
   }
 
-  /**
-   * Get event by ID
-   */
   async getEventById(eventId: string, language?: Language) {
     const event = await Event.findById(eventId).populate('createdBy', 'firstName lastName email');
 
@@ -81,9 +86,6 @@ export class EventService {
     return event;
   }
 
-  /**
-   * Update event
-   */
   async updateEvent(eventId: string, data: UpdateEventDTO, userId: string, language?: Language) {
     const event = await Event.findById(eventId);
 
@@ -95,15 +97,14 @@ export class EventService {
       throw new Error(t('auth.permission_denied', {}, language));
     }
 
+    await this.checkEditLock(eventId, userId, language);
+
     Object.assign(event, data);
     await event.save();
 
     return event;
   }
 
-  /**
-   * Delete event
-   */
   async deleteEvent(eventId: string, userId: string, language?: Language): Promise<void> {
     const event = await Event.findById(eventId);
 
@@ -120,12 +121,13 @@ export class EventService {
       throw new Error(t('auth.permission_denied', {}, language));
     }
 
+    await this.checkEditLock(eventId, userId, language);
+
     await Event.deleteOne({ _id: eventId });
+
+    await EditLock.deleteOne({ eventId: new Types.ObjectId(eventId) });
   }
 
-  /**
-   * Get user's created events
-   */
   async getUserEvents(userId: string, params: PaginationParams) {
     const { page = 1, limit = 10, sortBy = 'createdAt', sortOrder = 'desc' } = params;
 
@@ -153,9 +155,6 @@ export class EventService {
     };
   }
 
-  /**
-   * Check if event is active
-   */
   async isEventActive(eventId: string): Promise<boolean> {
     const event = await Event.findById(eventId);
     if (!event) return false;
@@ -164,9 +163,6 @@ export class EventService {
     return event.isActive && event.startDate <= now && event.endDate >= now;
   }
 
-  /**
-   * Check if vouchers available
-   */
   async hasAvailableVouchers(eventId: string): Promise<boolean> {
     const event = await Event.findById(eventId);
     if (!event) return false;

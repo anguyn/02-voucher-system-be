@@ -19,7 +19,7 @@ const router = Router();
  *   get:
  *     tags:
  *       - User Management
- *     summary: Get all users (Admin only)
+ *     summary: Get all users (Admin)
  *     description: Get paginated list of all users with optional filters for search, role, and active status
  *     security:
  *       - bearerAuth: []
@@ -123,7 +123,7 @@ const router = Router();
  *       401:
  *         description: Unauthorized
  *       403:
- *         description: Forbidden - Admin only
+ *         description: Forbidden - Admin
  */
 router.get('/', authenticate, requireAdmin, userController.getAllUsers);
 
@@ -133,7 +133,7 @@ router.get('/', authenticate, requireAdmin, userController.getAllUsers);
  *   get:
  *     tags:
  *       - User Management
- *     summary: Get user by ID (Admin only)
+ *     summary: Get user by ID (Admin)
  *     description: Get detailed information of a specific user
  *     security:
  *       - bearerAuth: []
@@ -160,7 +160,7 @@ router.get('/', authenticate, requireAdmin, userController.getAllUsers);
  *       401:
  *         description: Unauthorized
  *       403:
- *         description: Forbidden - Admin only
+ *         description: Forbidden - Admin
  *       404:
  *         description: User not found
  */
@@ -172,7 +172,7 @@ router.get('/:userId', authenticate, requireAdmin, userController.getUserById);
  *   patch:
  *     tags:
  *       - User Management
- *     summary: Update user role (Admin only)
+ *     summary: Update user role (Admin)
  *     description: Update user's role. Permissions will be automatically updated based on the new role.
  *     security:
  *       - bearerAuth: []
@@ -211,7 +211,7 @@ router.get('/:userId', authenticate, requireAdmin, userController.getUserById);
  *       401:
  *         description: Unauthorized
  *       403:
- *         description: Forbidden - Admin only
+ *         description: Forbidden - Admin
  *       404:
  *         description: User not found
  */
@@ -229,7 +229,7 @@ router.patch(
  *   patch:
  *     tags:
  *       - User Management
- *     summary: Update user permissions (Admin only)
+ *     summary: Update user permissions (Admin)
  *     description: Set custom permissions for a user. This overrides role-based permissions.
  *     security:
  *       - bearerAuth: []
@@ -284,7 +284,7 @@ router.patch(
  *       401:
  *         description: Unauthorized
  *       403:
- *         description: Forbidden - Admin only
+ *         description: Forbidden - Admin
  *       404:
  *         description: User not found
  */
@@ -302,7 +302,7 @@ router.patch(
  *   patch:
  *     tags:
  *       - User Management
- *     summary: Activate or deactivate user (Admin only)
+ *     summary: Activate or deactivate user (Admin)
  *     description: Toggle user's active status. Deactivating a user will logout them from all devices.
  *     security:
  *       - bearerAuth: []
@@ -340,7 +340,7 @@ router.patch(
  *       401:
  *         description: Unauthorized
  *       403:
- *         description: Forbidden - Admin only
+ *         description: Forbidden - Admin
  *       404:
  *         description: User not found
  */
@@ -358,7 +358,7 @@ router.patch(
  *   patch:
  *     tags:
  *       - User Management
- *     summary: Admin change user password (Admin only)
+ *     summary: Admin change user password (Admin)
  *     description: Change a user's password without requiring their current password. The user will be logged out from all devices. Admins cannot use this route to change their own password.
  *     security:
  *       - bearerAuth: []
@@ -415,7 +415,7 @@ router.patch(
  *   delete:
  *     tags:
  *       - User Management
- *     summary: Delete user (Admin only)
+ *     summary: Delete user (Admin)
  *     description: Permanently delete a user and all their refresh tokens. Admins cannot delete themselves.
  *     security:
  *       - bearerAuth: []

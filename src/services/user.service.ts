@@ -15,9 +15,6 @@ interface UpdateProfileDTO {
 }
 
 export class UserService {
-  /**
-   * Get all users with pagination and filters
-   */
   async getAllUsers(page: number, limit: number, filters: GetAllUsersFilters) {
     const query: any = {};
 
@@ -59,9 +56,6 @@ export class UserService {
     };
   }
 
-  /**
-   * Get user by ID
-   */
   async getUserById(userId: string): Promise<UserResponse | null> {
     const user = await User.findById(userId).select('-password').lean();
 
@@ -72,9 +66,6 @@ export class UserService {
     return this.formatUserResponse(user);
   }
 
-  /**
-   * Update user role (also updates permissions based on role)
-   */
   async updateUserRole(userId: string, role: UserRole, language?: Language): Promise<UserResponse> {
     const user = await User.findById(userId);
 
@@ -90,9 +81,6 @@ export class UserService {
     return this.formatUserResponse(user);
   }
 
-  /**
-   * Update user permissions (custom permissions override role defaults)
-   */
   async updateUserPermissions(
     userId: string,
     permissions: Permission[],
@@ -110,9 +98,6 @@ export class UserService {
     return this.formatUserResponse(user);
   }
 
-  /**
-   * Activate or deactivate user
-   */
   async toggleUserStatus(
     userId: string,
     isActive: boolean,
@@ -134,9 +119,6 @@ export class UserService {
     return this.formatUserResponse(user);
   }
 
-  /**
-   * Update user profile (firstName, lastName, language)
-   */
   async updateProfile(
     userId: string,
     data: UpdateProfileDTO,
@@ -157,9 +139,6 @@ export class UserService {
     return this.formatUserResponse(user);
   }
 
-  /**
-   * Change password (requires current password)
-   */
   async changePassword(
     userId: string,
     currentPassword: string,
@@ -183,9 +162,6 @@ export class UserService {
     await RefreshToken.deleteMany({ userId });
   }
 
-  /**
-   * Admin change user password (no current password required)
-   */
   async adminChangePassword(
     userId: string,
     newPassword: string,
@@ -203,9 +179,6 @@ export class UserService {
     await RefreshToken.deleteMany({ userId });
   }
 
-  /**
-   * Delete user
-   */
   async deleteUser(userId: string, language?: Language): Promise<void> {
     const user = await User.findById(userId);
 
@@ -218,9 +191,6 @@ export class UserService {
     await User.deleteOne({ _id: userId });
   }
 
-  /**
-   * Format user response (remove sensitive data)
-   */
   private formatUserResponse(user: any): UserResponse {
     return {
       id: user._id.toString(),

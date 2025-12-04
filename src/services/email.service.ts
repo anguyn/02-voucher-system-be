@@ -12,9 +12,6 @@ const FROM_EMAIL = process.env.FROM_EMAIL || 'noreply@anvel.site';
 const FROM_NAME = process.env.FROM_NAME || 'Voucher System';
 
 export class EmailService {
-  /**
-   * Send email using Resend
-   */
   async sendEmail(emailData: EmailJob): Promise<void> {
     try {
       await resend.emails.send({
@@ -31,9 +28,6 @@ export class EmailService {
     }
   }
 
-  /**
-   * Send welcome email
-   */
   async sendWelcomeEmail(
     email: string,
     firstName: string,
@@ -47,9 +41,6 @@ export class EmailService {
     await this.sendEmail({ to: email, subject, html });
   }
 
-  /**
-   * Send voucher issued email
-   */
   async sendVoucherEmail(
     email: string,
     voucherCode: string,
@@ -76,9 +67,6 @@ export class EmailService {
     await this.sendEmail({ to: email, subject, html, context: { voucherCode, eventTitle } });
   }
 
-  /**
-   * Send event reminder email
-   */
   async sendEventReminderEmail(
     email: string,
     eventTitle: string,
@@ -101,9 +89,6 @@ export class EmailService {
     await this.sendEmail({ to: email, subject, html });
   }
 
-  /**
-   * Test email connection
-   */
   async testConnection(): Promise<boolean> {
     try {
       await resend.emails.send({

@@ -11,7 +11,7 @@ import { t } from '../config/i18n';
 
 export class UserController {
   /**
-   * Get all users (Admin only)
+   * Get all users (Admin)
    */
   getAllUsers = async (req: AuthRequest, res: Response): Promise<void> => {
     try {
@@ -32,7 +32,7 @@ export class UserController {
   };
 
   /**
-   * Get user by ID (Admin only)
+   * Get user by ID (Admin)
    */
   getUserById = async (req: AuthRequest, res: Response): Promise<void> => {
     try {
@@ -51,7 +51,7 @@ export class UserController {
   };
 
   /**
-   * Update user role (Admin only)
+   * Update user role (Admin)
    */
   updateUserRole = async (req: AuthRequest, res: Response): Promise<void> => {
     try {
@@ -67,7 +67,7 @@ export class UserController {
   };
 
   /**
-   * Update user permissions (Admin only)
+   * Update user permissions (Admin)
    */
   updateUserPermissions = async (req: AuthRequest, res: Response): Promise<void> => {
     try {
@@ -83,7 +83,7 @@ export class UserController {
   };
 
   /**
-   * Activate/Deactivate user (Admin only)
+   * Activate/Deactivate user (Admin)
    */
   toggleUserStatus = async (req: AuthRequest, res: Response): Promise<void> => {
     try {
@@ -144,7 +144,7 @@ export class UserController {
   };
 
   /**
-   * Admin change user password (Admin only)
+   * Admin change user password (Admin)
    */
   adminChangePassword = async (req: AuthRequest, res: Response): Promise<void> => {
     try {
@@ -165,7 +165,7 @@ export class UserController {
   };
 
   /**
-   * Delete user (Admin only)
+   * Delete user (Admin)
    */
   deleteUser = async (req: AuthRequest, res: Response): Promise<void> => {
     try {
