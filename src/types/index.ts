@@ -55,7 +55,6 @@ export enum Language {
 
 export const ROLE_PERMISSIONS: Record<UserRole, Permission[]> = {
   [UserRole.ADMIN]: [
-    // Full access to everything
     Permission.EVENT_CREATE,
     Permission.EVENT_READ,
     Permission.EVENT_UPDATE,
@@ -72,24 +71,20 @@ export const ROLE_PERMISSIONS: Record<UserRole, Permission[]> = {
     Permission.SYSTEM_SETTINGS,
   ],
   [UserRole.MANAGER]: [
-    // Event management
     Permission.EVENT_CREATE,
     Permission.EVENT_READ,
     Permission.EVENT_UPDATE,
     Permission.EVENT_READ_ALL,
-    // Voucher management
     Permission.VOUCHER_READ_ALL,
-    // Limited user access
     Permission.USER_READ,
   ],
   [UserRole.USER]: [
-    // Basic read access
     Permission.EVENT_READ,
     Permission.VOUCHER_ISSUE,
     Permission.VOUCHER_READ,
     Permission.VOUCHER_USE,
     Permission.USER_READ,
-    Permission.USER_UPDATE, // Own profile only
+    Permission.USER_UPDATE,
   ],
 };
 
@@ -134,6 +129,7 @@ export interface IVoucher extends Document {
   issuedAt: Date;
   expiresAt: Date;
   isUsed: boolean;
+  isExpired: boolean;
   usedAt?: Date;
   createdAt: Date;
   updatedAt: Date;

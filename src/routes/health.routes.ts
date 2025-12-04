@@ -1,12 +1,8 @@
 import { Router, Request, Response } from 'express';
+import { checkDatabaseConnection } from '../config/database';
+import { checkRedisConnection } from '../config/redis';
 
 const router = Router();
-
-/**
- * @route   GET /health
- * @desc    Health check endpoint
- * @access  Public
- */
 
 /**
  * @openapi
@@ -16,6 +12,16 @@ const router = Router();
  *       - Health
  *     summary: Basic health check
  *     description: Returns basic server health status
+ *     parameters:
+ *       - in: query
+ *         name: lang
+ *         schema:
+ *           type: string
+ *           enum: [en, vi]
+ *           default: en
+ *         required: false
+ *         description: Set the response language
+ *         example: en
  *     responses:
  *       200:
  *         description: Server is healthy
@@ -35,19 +41,23 @@ router.get('/', (_req: Request, res: Response) => {
 });
 
 /**
- * @route   GET /health/detailed
- * @desc    Detailed health check
- * @access  Public
- */
-
-/**
  * @openapi
  * /health/detailed:
  *   get:
  *     tags:
  *       - Health
  *     summary: Detailed health check
- *     description: Returns detailed server health information including system metrics
+ *     description: Returns detailed server health information including system metrics, database and Redis status
+ *     parameters:
+ *       - in: query
+ *         name: lang
+ *         schema:
+ *           type: string
+ *           enum: [en, vi]
+ *           default: en
+ *         required: false
+ *         description: Set the response language
+ *         example: en
  *     responses:
  *       200:
  *         description: Detailed health information
@@ -78,8 +88,18 @@ router.get('/', (_req: Request, res: Response) => {
  *                       type: object
  *                     cpu:
  *                       type: object
+ *                 services:
+ *                   type: object
+ *                   properties:
+ *                     database:
+ *                       type: object
+ *                     redis:
+ *                       type: object
  */
-router.get('/detailed', (_req: Request, res: Response) => {
+router.get('/detailed', async (_req: Request, res: Response) => {
+  const dbStatus = await checkDatabaseConnection();
+  const redisStatus = await checkRedisConnection();
+
   const healthInfo = {
     success: true,
     message: 'Server is healthy',
@@ -94,6 +114,16 @@ router.get('/detailed', (_req: Request, res: Response) => {
         used: Math.round(process.memoryUsage().heapUsed / 1024 / 1024) + ' MB',
       },
       cpu: process.cpuUsage(),
+    },
+    services: {
+      database: {
+        status: dbStatus ? 'connected' : 'disconnected',
+        healthy: dbStatus,
+      },
+      redis: {
+        status: redisStatus ? 'connected' : 'disconnected',
+        healthy: redisStatus,
+      },
     },
   };
 
